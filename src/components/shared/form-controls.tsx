@@ -23,7 +23,6 @@ export function FormInput({ label, error, className, id, ...props }: InputProps)
           "h-11 w-full rounded-xl border bg-background px-3 text-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring",
           error ? "border-rose-400" : "",
           className,
-          props.className,
         )}
       />
       {error ? (
@@ -60,7 +59,6 @@ export function FormSelect({ label, error, options, className, id, ...props }: S
           "h-11 w-full rounded-xl border bg-background px-3 text-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring",
           error ? "border-rose-400" : "",
           className,
-          props.className,
         )}
       >
         {options.map((option) => (
