@@ -18,12 +18,13 @@ const schema = z.object({
   comments: z.string().min(10, "Comments are required."),
 });
 
-type Values = z.infer<typeof schema>;
+type ScorecardFormInput = z.input<typeof schema>;
+type ScorecardFormValues = z.output<typeof schema>;
 
 export function ScorecardForm({ interviewId }: { interviewId: string }) {
   const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [priorScorecards, setPriorScorecards] = useState<ScorecardRecord[]>([]);
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<Values>({
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ScorecardFormInput, unknown, ScorecardFormValues>({
     resolver: zodResolver(schema),
   });
 
@@ -31,7 +32,7 @@ export function ScorecardForm({ interviewId }: { interviewId: string }) {
     getScorecardRecordsForInterview(interviewId).then(setPriorScorecards);
   }, [interviewId]);
 
-  const onSubmit = async (values: Values) => {
+  const onSubmit = async (values: ScorecardFormValues) => {
     const response = await submitScorecard({ interviewId, ...values });
     setStatus({ type: response.success ? "success" : "error", message: response.message });
   };
