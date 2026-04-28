@@ -223,6 +223,7 @@ export function RolesSettingsScreen() {
   const onSubmit = handleSubmit(async () => {
     setStatus({ type: "success", message: "Roles and permissions saved (mock)." });
   });
+  const matrixErrorMessage = errors.matrix?.message;
 
   return (
     <SettingsPage
@@ -269,7 +270,9 @@ export function RolesSettingsScreen() {
             </tbody>
           </table>
         </div>
-        {errors.matrix ? <p className="text-xs text-rose-500">{errors.matrix.message}</p> : null}
+        {typeof matrixErrorMessage === "string" ? (
+          <p className="text-xs text-rose-500">{matrixErrorMessage}</p>
+        ) : null}
         <button
           type="submit"
           disabled={isSubmitting}
