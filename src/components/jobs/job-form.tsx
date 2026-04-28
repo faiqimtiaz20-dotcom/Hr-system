@@ -39,6 +39,8 @@ export function JobForm({ mode, initialJob }: { mode: "create" | "edit"; initial
   const {
     register,
     handleSubmit,
+    getValues,
+    setValue,
     trigger,
     formState: { errors, isSubmitting },
   } = useForm<JobFormValues>({
